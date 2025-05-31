@@ -1,0 +1,94 @@
+# Security-sensitive files
+medical_logs.db
+encryption.key
+*.key
+*.db
+*.db-shm
+*.db-wal
+.env
+secrets.toml
+
+# Python artifacts
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.pyz
+*.pyw
+*.egg-info/
+*.egg
+dist/
+build/
+.pytest_cache/
+
+# Virtual environments
+venv/
+.env/
+.venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+
+# Streamlit specific
+.streamlit/
+data/
+.streamlit/secrets.toml
+
+# System files
+.DS_Store
+Thumbs.db
+desktop.ini
+*.lnk
+
+# Logs
+*.log
+logs/
+log/
+*.log.*
+*.bak
+*.backup
+*.tmp
+*.temp
+
+# IDE files
+.idea/
+.vscode/
+.vs/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+*.iml
+*.ipr
+*.iws
+
+# Jupyter notebooks
+*.ipynb
+*.ipynb_checkpoints/
+
+# OS generated files
+ehthumbs.db
+[Tt]humbs.db
+*.stackdump
+
+# Compression files
+*.7z
+*.dmg
+*.gz
+*.iso
+*.jar
+*.rar
+*.tar
+*.zip
+
+# Documentation files
+*.chm
+*.pdf
+*.doc
+*.docx
+*.xls
+*.xlsx
+*.ppt
+*.pptx

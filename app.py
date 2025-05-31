@@ -9,7 +9,10 @@ from datetime import datetime
 # --- Configuration ---
 DB_FILE = "medical_logs.db"
 KEY_FILE = "encryption.key"
-COHERE_API_KEY = st.secrets.get("COHERE_API_KEY", os.environ.get("COHERE_API_KEY", "tkUV4E9TeK8SJt7SEpsEfv8QkvO2ZQTAKmnHWS64"))
+COHERE_API_KEY = st.secrets.get("COHERE_API_KEY", os.environ.get("COHERE_API_KEY"))
+if not COHERE_API_KEY:
+    st.error("Cohere API key not set. Please set the COHERE_API_KEY environment variable.")
+    st.stop()
 
 # --- Encryption Utilities ---
 def load_or_create_key():
@@ -31,7 +34,7 @@ def encrypt_text(plaintext: str) -> bytes:
 def decrypt_text(ciphertext: bytes) -> str:
     return FERNET.decrypt(ciphertext).decode("utf-8")
 
-# --- Database Utilities (UPDATED WITH SCHEMA MIGRATION) ---
+# --- Database Utilities
 def init_db():
     conn = sqlite3.connect(DB_FILE)
     cursor = conn.cursor()
@@ -82,7 +85,7 @@ def fetch_all_logs(decrypt=False):
         ]
     return rows
 
-# --- Enhanced Anomaly Detection ---
+# --- Anomaly Detection ---
 def detect_anomaly(text: str) -> list:
     """Detects security threats in input text"""
     threats = []
@@ -109,7 +112,7 @@ def detect_anomaly(text: str) -> list:
     
     return threats
 
-# --- Improved Urgency Detection ---
+# --- Urgency Detection ---
 def determine_urgency(response_text, symptoms):
     """More accurate urgency classification with symptom-based detection"""
     response_lower = response_text.lower()
@@ -176,7 +179,7 @@ def determine_urgency(response_text, symptoms):
     
     # 4. Check symptom keywords with context awareness
     if any(word in symptoms_lower for word in ["chest pain", "shortness of breath", "bloody"]):
-        return "URGENT"  # Not automatically emergency
+        return "URGENT" 
     
     # 5. Non-urgent by default
     return "NON-URGENT"
@@ -263,13 +266,12 @@ if prompt := st.chat_input("Describe your symptoms..."):
                     response = co.generate(
                         model="command",
                         prompt=medical_prompt,
-                        max_tokens=250,  # Reduced for more concise responses
-                        temperature=0.2   # Lower for more deterministic output
+                        max_tokens=250,
+                        temperature=0.2 
                     )
                     
                     full_response = response.generations[0].text
                     
-                    # Use improved urgency detection
                     urgency = determine_urgency(full_response, prompt)
                     
                     # Display urgency alert
@@ -281,7 +283,6 @@ if prompt := st.chat_input("Describe your symptoms..."):
                     else:
                         st.success("ℹ️ NON-URGENT: MONITOR SYMPTOMS")
                     
-                    # Display the full response
                     st.markdown(full_response)
                     
                     # Add to history and database
@@ -308,13 +309,12 @@ if st.session_state.get('show_logs'):
                     st.caption(f"Role: {log[1]}")
                     if log[4]:
                         st.error(f"Threats: {log[4]}")
-                    # Add unique key to prevent duplicate ID error
                     st.text_area(
                         "Message", 
                         value=log[2], 
                         height=150, 
                         disabled=True,
-                        key=f"log_{log[0]}_{log[3]}"  # Unique key
+                        key=f"log_{log[0]}_{log[3]}"
                     )
     except Exception as e:
         st.sidebar.error(f"Error loading logs: {str(e)}")
