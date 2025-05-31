@@ -1,21 +1,23 @@
 # Security-sensitive files
-encryption.key
-medical_logs.db*
+/encryption.key
+/medical_logs.db*
 *.key
 *.db
 *.db-shm
 *.db-wal
 
-# Virtual environment
+# Virtual environment - all variations
+/venv/
+/.venv/
+/env/
+/ENV/
+/env.bak/
+/venv.bak/
 venv/
-.venv/
-env/
-ENV/
-env.bak/
-venv.bak/
 
-# Python artifacts
-__pycache__/
+# Python artifacts - ensure full coverage
+**/__pycache__/
+**/*.py[cod]
 *.pyc
 *.pyo
 *.pyd
@@ -26,6 +28,7 @@ __pycache__/
 dist/
 build/
 .pytest_cache/
+.python-version
 
 # Streamlit specific
 .streamlit/
@@ -59,6 +62,7 @@ log/
 *.iml
 *.ipr
 *.iws
+.history/
 
 # Compression files
 *.7z
@@ -69,3 +73,7 @@ log/
 *.rar
 *.tar
 *.zip
+
+# Special cases
+*.env
+*.secret
