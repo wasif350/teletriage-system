@@ -30,7 +30,7 @@ This project implements techniques inspired by cutting-edge research in:
 # Linux/Mac
 - export COHERE_API_KEY='your_api_key_here'
 # Windows (Command Prompt)
-s- et COHERE_API_KEY='your_api_key_here'
+- set COHERE_API_KEY='your_api_key_here'
 
 
 ## Run the application:
