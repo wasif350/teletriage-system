@@ -1,12 +1,18 @@
 # Security-sensitive files
-medical_logs.db
 encryption.key
+medical_logs.db*
 *.key
 *.db
 *.db-shm
 *.db-wal
-.env
-secrets.toml
+
+# Virtual environment
+venv/
+.venv/
+env/
+ENV/
+env.bak/
+venv.bak/
 
 # Python artifacts
 __pycache__/
@@ -21,19 +27,9 @@ dist/
 build/
 .pytest_cache/
 
-# Virtual environments
-venv/
-.env/
-.venv/
-env/
-ENV/
-env.bak/
-venv.bak/
-
 # Streamlit specific
 .streamlit/
 data/
-.streamlit/secrets.toml
 
 # System files
 .DS_Store
@@ -64,15 +60,6 @@ log/
 *.ipr
 *.iws
 
-# Jupyter notebooks
-*.ipynb
-*.ipynb_checkpoints/
-
-# OS generated files
-ehthumbs.db
-[Tt]humbs.db
-*.stackdump
-
 # Compression files
 *.7z
 *.dmg
@@ -82,13 +69,3 @@ ehthumbs.db
 *.rar
 *.tar
 *.zip
-
-# Documentation files
-*.chm
-*.pdf
-*.doc
-*.docx
-*.xls
-*.xlsx
-*.ppt
-*.pptx
